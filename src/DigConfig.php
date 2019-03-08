@@ -23,7 +23,7 @@ class DigConfig
      * If $tries is less than or equal to zero, the number of tries is silently rounded up to 1.
      * @param int $tries The number of times to try UDP queries to server
      * @throws \InvalidArgumentException If $tries is not an integer
-     * @return void
+     * @return DigConfig The caller object.
      */
     public function setTries($tries = 3){
         if(!is_int($tries)) {
@@ -31,6 +31,7 @@ class DigConfig
         }
 
         $this->tries = $tries;
+        return $this;
     }
 
     /**
@@ -38,7 +39,7 @@ class DigConfig
      * An attempt to set $timeout to less than 1 will result in a query timeout of 1 second being applied.
      * @param int $timeout The timeout in seconds for a query
      * @throws \InvalidArgumentException If $timeout is not an integer
-     * @return void
+     * @return DigConfig The caller object.
      */
     public function setTimeout($timeout = 5){
         if(!is_int($timeout)) {
@@ -46,21 +47,23 @@ class DigConfig
         }
 
         $this->timeout = $timeout;
+        return $this;
     }
 
     /**
      * Sets the name or IP address of the name server to query.
      * @param string $server The name or IP address of the name server to query
      * @throws \InvalidArgumentException If $server is not a string
-     * @return void
+     * @return DigConfig The caller object.
      * @todo Validate if the string passed in $server is a hostname or IP.
      */
     public function setServer($server = null){
-        if(!is_string($server)) {
-            throw new \http\Exception\InvalidArgumentException('server needs to be an ip or hostname')
+        if(!is_string($server) && !is_null($server)) {
+            throw new \http\Exception\InvalidArgumentException('server needs to be an ip or a hostname or null')
         }
 
         $this->server = $server;
+        return $this;
     }
 
     /**
