@@ -11,33 +11,15 @@ use \RuntimeException;
 
 class Dig {
     protected $config = null;
-    protected $name = null;
-    protected $type = 'A';
 
     /**
      * Dig constructor.
-     * @param string $name The name to query.
-     * @param string $type The DNS record type to query. Default is A.
      * @param DigConfig $config The config for the command dig.
      */
-    public function __construct($name = null, $type = 'A', $config = new DigConfig){
-        $type = trim($type);
-        if (!$this->typeIsSupported($type)) {
-            throw new InvalidArgumentException(
-                "type {$type} not supported. Supported types are: " .
-                implode(',', $this->supportedTypes())
-            );
+    public function __construct($config = null){
+        if (!$config instanceof DigConfig) {
+            $config = new DigConfig();
         }
-
-        if (is_string($name)) { $name = trim($name); }
-        if (empty($name) || !is_string($name)) { //TODO: Really check if it is a hostname
-            throw new InvalidArgumentException(
-                "name needs to be a hostname"
-            );
-        }
-
-        $this->type = $type;
-        $this->name = $name;
         $this->config = $config;
     }
 
@@ -78,9 +60,11 @@ class Dig {
 
     /**
      * Builds the command line to run.
+     * @param string $name The name to query.
+     * @param string $type The DNS record type to query. Default is A.
      * @return string
      */
-    protected function buildCommandLine(){
+    protected function buildCommandLine($name = null, $type = 'A'){
         return
             "dig " .
             ($this->config->getServer()) .
@@ -91,15 +75,33 @@ class Dig {
             " " .
             $this->config->getShort() .
             " " .
-            " {$this->name} {$this->type}";
+            " {$name} {$type}";
     }
 
     /**
      * Query the server for the pair name + type
+     * @param string $name The name to query.
+     * @param string $type The DNS record type to query. Default is A.
      * @return array The return of dig execution
+     * @throws \InvalidArgumentException When parameters are unacceptable
      */
-    public function query(){
-        $commandLine = $this->buildCommandLine();
+    public function query($name = null, $type = 'A'){
+        $type = trim($type);
+        if (!$this->typeIsSupported($type)) {
+            throw new InvalidArgumentException(
+                "type {$type} not supported. Supported types are: " .
+                implode(',', $this->supportedTypes())
+            );
+        }
+
+        if (is_string($name)) { $name = trim($name); }
+        if (empty($name) || !is_string($name)) { //TODO: Really check if it is a hostname
+            throw new InvalidArgumentException(
+                "name needs to be a hostname"
+            );
+        }
+
+        $commandLine = $this->buildCommandLine($name, $type);
         $return = array();
         $intReturn = 0;
         exec($commandLine, $return, $intReturn);
