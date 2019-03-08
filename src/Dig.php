@@ -107,7 +107,7 @@ class Dig {
         exec($commandLine, $return, $intReturn);
 
         if ($intReturn != 0){
-            throw new \http\Exception\RuntimeException('dig execution returned a code different from 0');
+            throw new RuntimeException('dig execution returned a code different from 0');
         }
 
         return $return;
