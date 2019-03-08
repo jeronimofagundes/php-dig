@@ -27,7 +27,7 @@ class DigConfig
      */
     public function setTries($tries = 3){
         if(!is_int($tries)) {
-            throw new \http\Exception\InvalidArgumentException('tries needs to be an integer')
+            throw new InvalidArgumentException('tries needs to be an integer');
         }
 
         $this->tries = $tries;
@@ -43,7 +43,7 @@ class DigConfig
      */
     public function setTimeout($timeout = 5){
         if(!is_int($timeout)) {
-            throw new \http\Exception\InvalidArgumentException('timeout needs to be an integer')
+            throw new InvalidArgumentException('timeout needs to be an integer');
         }
 
         $this->timeout = $timeout;
@@ -59,7 +59,7 @@ class DigConfig
      */
     public function setServer($server = null){
         if(!is_string($server) && !is_null($server)) {
-            throw new \http\Exception\InvalidArgumentException('server needs to be an ip or a hostname or null')
+            throw new InvalidArgumentException('server needs to be an ip or a hostname or null');
         }
 
         $this->server = $server;
