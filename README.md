@@ -6,7 +6,7 @@ In order to one use this library, he/she can require it with composer,
 the standard PHP library package manager.
 
 ```
-composer require "jeronimofagundes/php-roman-numbers:1.0.2"
+composer require "jeronimofagundes/php-dig:1.0.3"
 ```  
 
 and use the following class in his/her code:
