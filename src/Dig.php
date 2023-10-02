@@ -1,7 +1,7 @@
 <?php
 /**
  * Runs the unix command dig.
- * @author Jeronimo Fagundes <jeronimo.fs@protonmail.com>
+ * @author Jerônimo Fagundes da Silva <jeronimo.fs@protonmail.com>
  */
 
 namespace JeronimoFagundes\PhpDig;

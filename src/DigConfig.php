@@ -1,7 +1,7 @@
 <?php
 /**
  * Configuration for the dig command.
- * @author Jeronimo Fagundes <jeronimo.fs@protonmail.com>
+ * @author Jerônimo Fagundes da Silva <jeronimo.fs@protonmail.com>
  */
 
 namespace JeronimoFagundes\PhpDig;
