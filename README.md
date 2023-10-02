@@ -12,8 +12,8 @@ composer require "jeronimofagundes/php-dig:1.0.3"
 and use the following class in his/her code:
 ```
 ...
-use \Jeronimofagundes\PhpDig\Dig;
-use \Jeronimofagundes\PhpDig\DigConfig;
+use \JeronimoFagundes\PhpDig\Dig;
+use \JeronimoFagundes\PhpDig\DigConfig;
 ...
 // If you need config the dig query, Do it like this:
 $digConf = new DigConfig();
